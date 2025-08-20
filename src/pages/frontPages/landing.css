@@ -1,0 +1,259 @@
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Arial', sans-serif; background:#f8f9fa; color:#333; }
+
+/* Container */
+.landing-container { display:flex; flex-direction:column; align-items:center; gap:40px; padding:20px; }
+
+/* Navbar fixa */
+/* Navbar ajustada */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(270deg, #4f46e5, #3b82f6, #22c55e); /* cor semelhante ao header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px; /* aumentei o padding para mais espaço */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: white; /* deixa branco para contraste com o gradiente */
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 10px 20px; /* aumenta o "espaço" interno dos links */
+  border-radius: 8px;
+}
+
+.navbar-links li a:hover {
+  background-color: rgba(255,255,255,0.2); /* leve destaque ao passar o mouse */
+}
+
+@keyframes bounceLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.navbar-logo img {
+  animation: bounceLogo 1.5s infinite;  height: 50px; /* tamanho do logo */
+  width: auto; 
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links li a:hover {
+  color: #007BFF;
+}
+
+/* Header animado */
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.site-header {
+  text-align:center;
+  background: linear-gradient(270deg, #4f46e5, #3b82f6, #22c55e);
+  background-size: 600% 600%;
+  animation: gradientBG 15s ease infinite;
+  color:white;
+  padding:60px 20px;
+  border-radius:16px;
+  width:100%;
+  max-width:1200px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  margin-top:70px; /* espaço pro header não ficar atrás da navbar */
+}
+
+.site-header h1 { font-size:3rem; margin-bottom:10px; }
+.site-header p { font-size:1.3rem; margin-bottom:25px; }
+
+.cta-button {
+  background-color:#22c55e;
+  color:white;
+  padding:14px 35px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  border:none;
+  font-size:1.1rem;
+  transition: all 0.3s;
+  text-decoration:none;
+  display:inline-block;
+  animation: pulse 2s infinite;
+}
+
+.cta-button:hover { background-color:#16a34a; transform: translateY(-5px); }
+
+@keyframes pulse {
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+}
+
+/* Sobre Nós */
+.about {
+  width: 100%;
+  max-width: 1000px;
+  background: #f0f4f8; /* fundo clarinho */
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  margin-top: 30px;
+}
+
+.about h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.about h2::before {
+  content: "🔎"; /* ícone decorativo */
+}
+
+.about p {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.about ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.about ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.about ul li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.about ul li .icon {
+  font-size: 2rem;
+}
+
+.about ul li span {
+  font-weight: 600;
+  color: #111827;
+  font-size: 1rem;
+}
+
+/* Produtos */
+.products { width:100%; max-width:1200px; text-align:center; }
+.products h2 { font-size:2rem; margin-bottom:30px; }
+.product-list { display:flex; justify-content:space-around; flex-wrap:wrap; gap:30px; }
+
+.product-card { background:white; border-radius:16px; overflow:hidden; width:30%; min-width:250px; box-shadow:0 8px 16px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+.product-card:hover { transform:translateY(-10px); box-shadow:0 12px 24px rgba(0,0,0,0.2); }
+
+.product-image { width:100%; height:220px; object-fit:cover; transition: transform 0.3s; }
+.product-card:hover .product-image { transform: rotateY(10deg) rotateX(5deg) scale(1.05); }
+
+.product-info { padding:20px; }
+.product-info h3 { margin-bottom:10px; }
+.product-info p { margin-bottom:8px; }
+.price { font-weight:bold; color:#16a34a; }
+
+/* Serviços */
+.services {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.service-card .icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Clientes */
+.clients { width:100%; max-width:1000px; text-align:center; }
+.clients h2 { font-size:2rem; margin-bottom:25px; }
+.client-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.client-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid black;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.client-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+.site-footer { width:100%; max-width:1200px; background:#222; color:white; padding:50px 20px; display:flex; flex-direction:column; gap:30px; border-radius:16px; }
+.footer-contact h2, .footer-map h2 { margin-bottom:20px; text-align:center; }
+.footer-contact ul { list-style:none; display:flex; justify-content:center; gap:25px; flex-wrap:wrap; }
+.footer-contact li { display:flex; align-items:center; gap:8px; font-size:1.1rem; }
+.footer-map iframe { border-radius:16px; width:100%; height:300px; }
