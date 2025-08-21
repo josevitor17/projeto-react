@@ -7,7 +7,7 @@ import oculos3 from "../../assets/oculos-moderno-3.jpg";
 import cliente1 from "../../assets/cliente-sorrindo-1.jpg";
 import cliente2 from "../../assets/cliente-sorrindo-2.jpg";
 
-export default function Landing() {
+export default function Landing(){
   const navigate = useNavigate();
 
   return (
@@ -15,11 +15,7 @@ export default function Landing() {
       {/* Navbar fixa */}
       <nav className="navbar">
         <div className="navbar-logo">
-          <img 
-            src="https://static.thenounproject.com/png/eyeglasses-icon-1360804-512.png" 
-            alt="Logo da Ótica"
-            className="logo"
-          />
+        
         </div>
         <ul className="navbar-links">
           <li><a href="#about">SOBRE</a></li>
