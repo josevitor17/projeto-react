@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import UserImage from '../../assets/users.jpg';
-
-import api from '../../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import UserImage from "../../assets/users.jpg";
+import api from "../../services/api"; // Axios configurado com seu backend online
+import { useNavigate } from "react-router-dom";
 
 import {
   PageWrapper,
@@ -14,61 +13,63 @@ import {
   TrashIcon,
   AvatarUsers,
   Button,
-} from './styles';
+} from "./styles";
 
-import Trash from '../../assets/trash.svg';
+import Trash from "../../assets/trash.svg";
 
 function ListUsers() {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null); // para modal de detalhes
-  const [userToDelete, setUserToDelete] = useState(null); // para modal de confirmação
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [userToDelete, setUserToDelete] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getUsers() {
-      const { data } = await api.get('/usuarios');
-      setUsers(data);
+      try {
+        const { data } = await api.get("/usuarios"); // API do backend online
+        setUsers(data);
+      } catch (error) {
+        console.error(error);
+        setErrorMsg(
+          "Não foi possível carregar os usuários. Verifique sua conexão ou servidor."
+        );
+      }
     }
     getUsers();
   }, []);
 
-  async function deleteUser(id) {
-    await api.delete(`/usuarios/${id}`);
-    const updatedUsers = users.filter((user) => user.id !== id);
-    setUsers(updatedUsers);
-  }
-
-  const handleCardClick = (user) => {
-    setSelectedUser(user);
+  const deleteUser = async (id) => {
+    try {
+      await api.delete(`/usuarios/${id}`); // Deleta no backend
+      setUsers(users.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error(error);
+      setErrorMsg("Não foi possível deletar o usuário.");
+    }
   };
 
-  const closeDetailModal = () => {
-    setSelectedUser(null);
-  };
-
+  const handleCardClick = (user) => setSelectedUser(user);
+  const closeDetailModal = () => setSelectedUser(null);
   const openDeleteModal = (e, user) => {
-    e.stopPropagation(); // não abre modal de detalhes
+    e.stopPropagation();
     setUserToDelete(user);
   };
-
   const confirmDelete = () => {
     if (userToDelete) {
       deleteUser(userToDelete.id);
       setUserToDelete(null);
     }
   };
-
-  const cancelDelete = () => {
-    setUserToDelete(null);
-  };
+  const cancelDelete = () => setUserToDelete(null);
 
   return (
     <PageWrapper>
       <UserImageLarge src={UserImage} alt="imagem-usuarios" />
-
       <Container>
         <Title>Usuários Cadastrados</Title>
-
+        {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
+        {users.length === 0 && !errorMsg && <p>Carregando usuários...</p>}
         <ContainerUsers>
           {users.map((user) => (
             <CardUsers key={user.id} onClick={() => handleCardClick(user)}>
@@ -88,9 +89,8 @@ function ListUsers() {
             </CardUsers>
           ))}
         </ContainerUsers>
-
-        <Button type="button" onClick={() => navigate('/')}>
-          voltar
+        <Button type="button" onClick={() => navigate("/")}>
+          Voltar
         </Button>
       </Container>
 
@@ -115,23 +115,11 @@ function ListUsers() {
               O usuário <strong>{userToDelete.name}</strong> será removido
               permanentemente.
             </p>
-            <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
-              <Button
-                onClick={confirmDelete}
-                style={{
-                  background: 'red',
-                  color: '#fff',
-                }}
-              >
+            <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
+              <Button onClick={confirmDelete} style={{ background: "red", color: "#fff" }}>
                 Confirmar
               </Button>
-              <Button
-                onClick={cancelDelete}
-                style={{
-                  background: '#ccc',
-                  color: '#000',
-                }}
-              >
+              <Button onClick={cancelDelete} style={{ background: "#ccc", color: "#000" }}>
                 Cancelar
               </Button>
             </div>
@@ -144,24 +132,23 @@ function ListUsers() {
 
 export default ListUsers;
 
-// Estilos simples para o overlay e modal
 const overlayStyle = {
-  position: 'fixed',
+  position: "fixed",
   top: 0,
   left: 0,
-  width: '100%',
-  height: '100%',
-  background: 'rgba(0,0,0,0.5)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  width: "100%",
+  height: "100%",
+  background: "rgba(0,0,0,0.5)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   zIndex: 1000,
 };
 
 const modalStyle = {
-  background: '#fff',
-  padding: '20px',
-  borderRadius: '8px',
-  minWidth: '300px',
-  maxWidth: '90%',
+  background: "#fff",
+  padding: "20px",
+  borderRadius: "8px",
+  minWidth: "300px",
+  maxWidth: "90%",
 };

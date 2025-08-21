@@ -14,9 +14,7 @@ export default function Landing(){
     <div className="landing-container">
       {/* Navbar fixa */}
       <nav className="navbar">
-        <div className="navbar-logo">
         
-        </div>
         <ul className="navbar-links">
           <li><a href="#about">SOBRE</a></li>
           <li><a href="#products">PRODUTOS</a></li>

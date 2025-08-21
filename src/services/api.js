@@ -1,9 +1,8 @@
-import axios from 'axios' 
+// api.js
+import axios from "axios";
 
-const api= axios.create ({
+const api = axios.create({
+  baseURL: "https://meu-backend.com", // URL pública do backend
+});
 
-baseURL:'http://localhost:3001'
-
-})
-
-export default api
+export default api;
