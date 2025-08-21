@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://meu-backend.com", // URL pública do backend
+  baseURL: "http://localhost:3001", // URL pública do backend
 });
 
 export default api;

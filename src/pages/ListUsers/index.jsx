@@ -12,8 +12,8 @@ import {
   CardUsers,
   TrashIcon,
   AvatarUsers,
-  Button,
-} from "../components/styles";
+  Button
+} from "./styles"; 
 
 import Trash from "../../assets/trash.svg";
 
